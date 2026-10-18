@@ -5,7 +5,7 @@ Odpowiedź mieści się na jednej stronie. Projekt dotyczy nadzorowanej klasyfik
 1. Roboczy tytuł: Klasyfikacja obrazów ze zbioru EuroSAT pod kątem rodzaju zagospodarowania przestrzennego
 2. Modalność (tekst, obraz, audio albo dane multimodalne): obraz
 3. Problem klasyfikacji (co jest klasą i ile jest klas): 10 klas (rodzaje zagospodarowania przestrzennego)
-4. Pytanie eksperymentalne (co chcesz sprawdzić): czy foundation model specjalizujący się w klasyfikacji obrazów jest w stanie, po fine-tuningu, dorównać jakości tradycyjnego modelu konwolucyjnego trenowanego na wąskich danych?
+4. Pytanie eksperymentalne (co chcesz sprawdzić): czy niewielki foundation model specjalizujący się w klasyfikacji obrazów jest w stanie, po fine-tuningu, dorównać jakości tradycyjnego modelu (CNN albo ResNet) trenowanego na wąskich danych?
 5. Źródło danych (link): https://github.com/phelber/eurosat
 6. Przybliżona wielkość zbioru: 27000 zdjęć RGB w formacie jpg o wymiarach 64x64 pikseli
 7. Lista klas i sposób oznaczenia etykiet: oznaczone kolejnymi liczbami naturalnymi
