@@ -98,32 +98,58 @@ Uzupełniaj sekcje w zadaniach podanych w nawiasach. Zastępuj teksty w nawiasac
 
 ## Informacje ogólne
 
-* Tytuł: [tytuł projektu]
-* Autor: [imię i nazwisko]
-* Modalność: [tekst, obraz, audio albo dane multimodalne]
-* Problem klasyfikacji: [co jest klasą, ile jest klas]
+* Tytuł: [Klasyfikacja obrazów ze zbioru EuroSAT pod kątem rodzaju zagospodarowania przestrzennego]
+* Autor: [Tadeusz Pawlonka]
+* Modalność: [obraz]
+* Problem klasyfikacji: [10 klas (rodzaje zagospodarowania przestrzennego)]
 
 ## Problem i pytanie eksperymentalne (Zadanie 1)
 
-[Jaki problem rozwiązujesz i co dokładnie chcesz sprawdzić.]
+[Problem: klasyfikacja zagospodarowania przestrzennego na podstawie zdjęć satelitarnych \
+Pytanie eksperymentalne: czy niewielki foundation model specjalizujący się w klasyfikacji obrazów jest w stanie dorównać lub przewyższyć jakość klasycznego klasyfikatora obrazów, wyrażoną przy pomocy metryki macro-F1?]
 
 ## Dane i licencja (Zadanie 1)
 
-[Źródło i link, licencja, sposób pobrania, liczba przykładów, lista klas, sposób oznaczenia etykiet, znane ograniczenia.]
+[\
+Źródło i link: https://github.com/phelber/eurosat \
+Licencja: MIT License\
+Liczba przykładów: 27000\
+Liczba klas: 10 \
+Liczności klas:
+1. AnnualCrop: 3000
+2. Forest: 3000
+3. HerbaceousVegetation: 3000
+4. Highway: 2500
+5. Industrial: 2500
+6. Pasture: 2000
+7. PermanentCrop: 2500
+8. Residential: 3000
+9. River: 2500
+10. SeaLake: 3000
+
+Duplikaty danych: brak\
+Sposób oznaczenia etykiet: kolejne liczby naturalne, zaczynając od 0 \
+Znane ograniczenia: 
+1. Niewielka rozdzielczość zdjęć (64x64 px).
+2. Brak metadanych geograficznych zmniejsza możliwość generalizacji i stwarza ryzyko uczenia się na informacjach innych niż zamierzone (np. korelacjach konkretnego zagospodarowania z konkretnymi rejonami geograficznymi które zostały sfotograwowane).
+3. Nie da się określić liczby niezależnych jednostek przez brak metadanych geograficznych. Zdjęcia pochodzą z Europy, ale ciężko jest stwierdzić np. z których konkretnie krajów, albo który z dwóch satelitów je wykonał.
+4. Ryzyko data leakage: ciężko jest skontrolować to, czy zbiór testowy nie zawiera danych podobnych do zbioru treningowego, ze względu na brak tagów geograficznych oraz ze względu na trudność manualnego audytowania takiej ilości danych.
+
+]
 
 ## Protokół (Zadanie 1)
 
-* Jednostka generalizacji: [na przykład recenzja, pacjent, mówca, nagranie źródłowe]
-* Podział: [metoda i uzasadnienie]
-* Metryka główna i pomocnicze: [z uzasadnieniem]
-* Seed: [wartość]
+* Jednostka generalizacji: [zdjęcie satelitarne; model ma z założenia funkcjonować na zdjęciach satelitarnych z dowolnego miejsca na globie i poprawnie klasyfikować ich rodzaj zagospodarowania przestrzennego]
+* Podział: [stratified split dla zachowania proporcji liczności klas w każdym z trzech zbiorów; przyjęta proporcja train/validate/final_test to 70%/15%/15%, odpowiednia do rozmiaru bazy danych]
+* Metryka główna i pomocnicze: [Metryka główna: Macro-F1, pozwalające uśrednić to jak dobrze model generalizuje każdą z 10 klas, niezależnie od ich indywidualnych liczności które różnią się pomiędzy klasami (zakres wynosi od 2000 do 3000 przykładów, czyli niektóre klasy są aż o 50% większe niż inne)]
+* Seed: [111]
 * Final test: zamrożony w commicie z tagiem `task-1`, identyfikatory w `splits/`. Jeśli podział był później poprawiany, podaj commit poprawionej wersji i opisz zmianę w dzienniku zmian.
 
 | Zbiór | Liczba przykładów | Liczba niezależnych jednostek |
-|---|---|---|
-| train | | |
-| validation | | |
-| final test | | |
+|---|-------------------|-------------------------------|
+| train | 18900                  | 1 (Europa)                    |
+| validation | 4050                  | 1 (Europa)                    |
+| final test | 4050                  | 1 (Europa)                    |
 
 ## Wyniki (Zadania 2 do 5)
 
